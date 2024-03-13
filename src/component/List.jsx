@@ -13,6 +13,7 @@ const List = () => {
       console.log(data.data);
       setPost(data?.data);
       // console.log(post[0].title.toString())
+      //test2
     });
   }, [update]);
 
