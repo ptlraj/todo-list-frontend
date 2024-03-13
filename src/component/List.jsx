@@ -88,6 +88,7 @@ const posttodo=async()=>{
                   onClick={() => {
                     setshow(true);
                     setid(todo._id)
+                    //for test
                     // updatetodo(todo._id);
                   }}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
