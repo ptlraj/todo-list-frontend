@@ -6,7 +6,7 @@ const List = () => {
   const [title, settitle] = useState("");
   const [id, setid] = useState("");
   const [description, setdiscription] = useState("");
-  const[update,setupdate]=useState(false);
+  const [update, setupdate] = useState(false);
 
   useEffect(() => {
     axios.get("http://localhost:3000/getAll").then((data) => {
@@ -16,22 +16,22 @@ const List = () => {
     });
   }, [update]);
 
-const posttodo=async()=>{
-  const res=await fetch(`http://localhost:3000/post`,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({title:title,description:description})
-  })
-  setupdate(!update);
-  settitle("");
-  setdiscription("");
-}
+  const posttodo = async () => {
+    const res = await fetch(`http://localhost:3000/post`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title, description: description }),
+    });
+    setupdate(!update);
+    settitle("");
+    setdiscription("");
+  };
 
   const deletetodo = async (id) => {
-    const res=await fetch(`http://localhost:3000/delete/${id}`,{
-      method:"DELETE",
-      headers:{"Content-Type":"application/json"}
-    })
+    const res = await fetch(`http://localhost:3000/delete/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
 
     // let arr = post.filter(e=> e._id != id)
     setPost((pre) => {
@@ -43,33 +43,37 @@ const posttodo=async()=>{
     const res = await fetch(`http://localhost:3000/update/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: title , description:description }),
+      body: JSON.stringify({ title: title, description: description }),
     });
-    setupdate(!update)
+    setupdate(!update);
   };
   return (
-    
     <div>
-      <div>
-      <input
-            type="text"
-            placeholder="Enter your title"
-            value={title}
-            onChange={(e) => settitle(e.target.value)}
-          ></input>
-  
-          <input
-            type="text"
-            placeholder="Enter your discrription"
-            value={description}
-            onChange={(e) => setdiscription(e.target.value)}
-          ></input>
-      
-          <button onClick={()=>{
-            posttodo()
-          }}>add</button>
+      <div className="p-5">
+        <input
+          type="text"
+          placeholder="Enter your title"
+          value={title}
+          onChange={(e) => settitle(e.target.value)}
+        ></input>
+
+        <input
+          type="text"
+          placeholder="Enter your discrription"
+          value={description}
+          onChange={(e) => setdiscription(e.target.value)}
+        ></input>
+
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+            posttodo();X  
+          }}
+        >
+          add
+        </button>
       </div>
-      <table className=" bg-white">
+      <table border="1" className=" bg-white p-5">
         <thead>
           <tr className="bg-gray-800 text-white">
             <th className="px-4 py-2">Title</th>
@@ -87,7 +91,7 @@ const posttodo=async()=>{
                 <button
                   onClick={() => {
                     setshow(true);
-                    setid(todo._id)
+                    setid(todo._id);
                     //for test
                     // updatetodo(todo._id);
                   }}
@@ -127,10 +131,14 @@ const posttodo=async()=>{
             onChange={(e) => setdiscription(e.target.value)}
           ></input>
           <br></br>
-          <button onClick={()=>{
-            updatetodo(id)
-            setshow(false)
-          }}>done</button>
+          <button
+            onClick={() => {
+              updatetodo(id);
+              setshow(false);
+            }}
+          >
+            done
+          </button>
         </>
       ) : null}
     </div>
